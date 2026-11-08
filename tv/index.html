@@ -2,7 +2,6 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<script>location.replace("https://script.google.com/macros/s/AKfycbyyEfrl2q0m-cO5RPbd9NgkKTF1zK56s_SxOWNBmvfNo3lt2Ds5Px7HHTHBSJcNp84LvQ/exec?view=tv");</script>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Samui Disc Golf – Live</title>
 <meta name="description" content="Follow league nights, results and highlights from the course.">
@@ -16,10 +15,17 @@
 <meta property="og:url" content="https://samuidiscgolf.github.io/go/tv/">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="icon" type="image/png" href="https://samuidiscgolf.github.io/go/favicon.png">
+<link rel="apple-touch-icon" href="https://samuidiscgolf.github.io/go/logo-192.png">
 <meta name="theme-color" content="#021a52">
-<style>body { margin: 0; background: #021a52; color: #fff; font-family: system-ui, sans-serif; text-align: center; padding-top: 40vh; } a { color: #fff; }</style>
+<style>
+  /* BAR = height of Google's "created by a Google Apps Script user" line – pushed up out of sight */
+  :root { --bar: 50px; }
+  @media (max-width: 700px) { :root { --bar: 70px; } }
+  html, body { margin: 0; height: 100%; overflow: hidden; background: #021a52; }
+  iframe { position: absolute; left: 0; top: calc(-1 * var(--bar)); width: 100%; height: calc(100% + var(--bar)); border: 0; }
+</style>
 </head>
 <body>
-<a href="https://script.google.com/macros/s/AKfycbyyEfrl2q0m-cO5RPbd9NgkKTF1zK56s_SxOWNBmvfNo3lt2Ds5Px7HHTHBSJcNp84LvQ/exec?view=tv">Open the live board</a>
+<iframe src="https://script.google.com/macros/s/AKfycbyyEfrl2q0m-cO5RPbd9NgkKTF1zK56s_SxOWNBmvfNo3lt2Ds5Px7HHTHBSJcNp84LvQ/exec?view=tv" title="Samui Disc Golf – Live" allow="fullscreen"></iframe>
 </body>
 </html>
