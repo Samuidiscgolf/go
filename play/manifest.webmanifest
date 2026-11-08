@@ -1,0 +1,15 @@
+{
+  "name": "Samui Disc Golf – Play now",
+  "short_name": "Samui DG",
+  "description": "Score your round on your phone – live on the course TV.",
+  "start_url": "/go/play/",
+  "scope": "/go/play/",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#ffffff",
+  "theme_color": "#022f8f",
+  "icons": [
+    { "src": "/go/logo-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "/go/logo-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" }
+  ]
+}
