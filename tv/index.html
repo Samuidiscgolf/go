@@ -18,14 +18,21 @@
 <link rel="apple-touch-icon" href="https://samuidiscgolf.github.io/go/logo-192.png">
 <meta name="theme-color" content="#021a52">
 <style>
-  /* BAR = height of Google's "created by a Google Apps Script user" line – pushed up out of sight */
-  :root { --bar: 50px; }
-  @media (max-width: 700px) { :root { --bar: 70px; } }
   html, body { margin: 0; height: 100%; overflow: hidden; background: #021a52; }
-  iframe { position: absolute; left: 0; top: calc(-1 * var(--bar)); width: 100%; height: calc(100% + var(--bar)); border: 0; }
+  iframe { position: absolute; left: 0; width: 100%; border: 0; }
 </style>
 </head>
 <body>
-<iframe src="https://script.google.com/macros/s/AKfycbyyEfrl2q0m-cO5RPbd9NgkKTF1zK56s_SxOWNBmvfNo3lt2Ds5Px7HHTHBSJcNp84LvQ/exec?view=tv" title="Samui Disc Golf – Live" allow="fullscreen"></iframe>
+<iframe id="app" src="https://script.google.com/macros/s/AKfycbyyEfrl2q0m-cO5RPbd9NgkKTF1zK56s_SxOWNBmvfNo3lt2Ds5Px7HHTHBSJcNp84LvQ/exec?view=tv" title="Samui Disc Golf – Live" allow="fullscreen"></iframe>
+<script>
+  // BAR = height of Google's "created by a Google Apps Script user" line, pushed up out of sight.
+  // Test another value with ?bar=30 at the end of the address.
+  const DESKTOP = 30, PHONE = 50;
+  const q = Number(new URLSearchParams(location.search).get('bar'));
+  const bar = q >= 0 && location.search.indexOf('bar=') >= 0 ? q : (innerWidth > 700 ? DESKTOP : PHONE);
+  const f = document.getElementById('app');
+  f.style.top = (-bar) + 'px';
+  f.style.height = 'calc(100% + ' + bar + 'px)';
+</script>
 </body>
 </html>
