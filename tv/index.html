@@ -27,7 +27,7 @@
 <script>
   // BAR = height of Google's "created by a Google Apps Script user" line, pushed up out of sight.
   // Test another value with ?bar=30 at the end of the address.
-  const DESKTOP = 30, PHONE = 50;
+  const DESKTOP = 0, PHONE = 0;
   const q = Number(new URLSearchParams(location.search).get('bar'));
   const bar = q >= 0 && location.search.indexOf('bar=') >= 0 ? q : (innerWidth > 700 ? DESKTOP : PHONE);
   const f = document.getElementById('app');
