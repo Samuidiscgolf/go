@@ -14,25 +14,26 @@
 <meta property="og:image:height" content="630">
 <meta property="og:url" content="https://samuidiscgolf.github.io/go/tv/">
 <meta name="twitter:card" content="summary_large_image">
-<link rel="icon" type="image/png" href="https://samuidiscgolf.github.io/go/favicon.png">
-<link rel="apple-touch-icon" href="https://samuidiscgolf.github.io/go/logo-192.png">
+<link rel="icon" type="image/png" sizes="64x64" href="https://samuidiscgolf.github.io/go/favicon.png">
+<link rel="icon" type="image/png" sizes="192x192" href="https://samuidiscgolf.github.io/go/logo-live-192.png">
+<link rel="icon" type="image/png" sizes="512x512" href="https://samuidiscgolf.github.io/go/logo-live-512.png">
+<link rel="apple-touch-icon" href="https://samuidiscgolf.github.io/go/logo-live-192.png">
 <meta name="theme-color" content="#021a52">
+<meta name="mobile-web-app-capable" content="yes">
+<link rel="manifest" href="manifest.webmanifest">
 <style>
   html, body { margin: 0; height: 100%; overflow: hidden; background: #021a52; }
-  iframe { position: absolute; left: 0; width: 100%; border: 0; }
+  iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
 </style>
 </head>
 <body>
-<iframe id="app" src="https://script.google.com/macros/s/AKfycbyyEfrl2q0m-cO5RPbd9NgkKTF1zK56s_SxOWNBmvfNo3lt2Ds5Px7HHTHBSJcNp84LvQ/exec?view=tv" title="Samui Disc Golf – Live" allow="fullscreen"></iframe>
+<iframe id="app" title="Samui Disc Golf – Live" allow="fullscreen"></iframe>
 <script>
-  // BAR = height of Google's "created by a Google Apps Script user" line, pushed up out of sight.
-  // Test another value with ?bar=30 at the end of the address.
-  const DESKTOP = 0, PHONE = 0;
-  const q = Number(new URLSearchParams(location.search).get('bar'));
-  const bar = q >= 0 && location.search.indexOf('bar=') >= 0 ? q : (innerWidth > 700 ? DESKTOP : PHONE);
-  const f = document.getElementById('app');
-  f.style.top = (-bar) + 'px';
-  f.style.height = 'calc(100% + ' + bar + 'px)';
+  // The real app's TV view – or the TEST app with ?test at the end of the address
+  const REAL = 'https://script.google.com/macros/s/AKfycbyyEfrl2q0m-cO5RPbd9NgkKTF1zK56s_SxOWNBmvfNo3lt2Ds5Px7HHTHBSJcNp84LvQ/exec';
+  const TEST = 'https://script.google.com/macros/s/AKfycbywROVV9TQYbiF0kwp4K-f2L1bmm8QTxmOxJhQx6VnflGjxkFA6atqN8x3ZjUxjgY5X/exec';
+  const q = new URLSearchParams(location.search);
+  document.getElementById('app').src = (q.has('test') ? TEST : REAL) + '?view=tv';
 </script>
 </body>
 </html>
