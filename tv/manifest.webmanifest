@@ -1,10 +1,12 @@
 {
+  "id": "/go/tv/",
   "name": "Samui Disc Golf – Live",
   "short_name": "Samui Live",
   "description": "Follow league nights, results and highlights from the course.",
   "start_url": "/go/tv/",
   "scope": "/go/tv/",
   "display": "standalone",
+  "orientation": "landscape",
   "background_color": "#021a52",
   "theme_color": "#021a52",
   "icons": [
