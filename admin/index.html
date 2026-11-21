@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover">
+<title>Samui Disc Golf – Admin</title>
+<meta name="robots" content="noindex">
+<link rel="icon" type="image/png" sizes="192x192" href="https://samuidiscgolf.github.io/go/logo-192.png">
+<link rel="apple-touch-icon" href="https://samuidiscgolf.github.io/go/logo-192.png">
+<meta name="theme-color" content="#021a52">
+<meta name="mobile-web-app-capable" content="yes">
+<link rel="manifest" href="manifest.webmanifest?v=1">
+<style>
+  /* Admin v1.0 – one icon for Peter: Play · Prize · Share · TV, real or test app */
+  html, body { margin: 0; height: 100%; overflow: hidden; background: #021a52; font-family: system-ui, sans-serif; }
+  .apps { position: absolute; left: 0; right: 0; top: 0; bottom: calc(64px + env(safe-area-inset-bottom)); }
+  iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; background: #fff; display: none; }
+  iframe.on { display: block; }
+  nav { position: absolute; left: 0; right: 0; bottom: 0; height: calc(64px + env(safe-area-inset-bottom));
+        padding-bottom: env(safe-area-inset-bottom); display: flex; background: #021a52;
+        box-shadow: 0 -2px 10px rgba(0,0,0,.35); }
+  nav button { flex: 1; border: 0; background: none; color: #8fa3cc; font: 700 12px system-ui, sans-serif;
+               display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px; }
+  nav button b { font-size: 22px; line-height: 1; }
+  nav button.on { color: #fff; box-shadow: inset 0 3px 0 #c8102e; }
+  nav .mode { flex: .9; }
+  nav .mode span { padding: 3px 8px; border-radius: 999px; background: #1446b8; color: #fff; font-weight: 800; }
+  nav .mode.test span { background: #c8102e; }
+</style>
+</head>
+<body>
+<div class="apps" id="apps"></div>
+<nav>
+  <button data-v="play"><b>🥏</b>Play</button>
+  <button data-v="prize"><b>🏆</b>Prize</button>
+  <button data-v="share"><b>📤</b>Share</button>
+  <button data-v="tv"><b>📺</b>TV</button>
+  <button class="mode" id="mode"><b>⚙️</b><span>REAL</span></button>
+</nav>
+<script>
+  // The real app – and the TEST app (the test copy of the sheet)
+  const REAL = 'https://script.google.com/macros/s/AKfycbyyEfrl2q0m-cO5RPbd9NgkKTF1zK56s_SxOWNBmvfNo3lt2Ds5Px7HHTHBSJcNp84LvQ/exec';
+  const TEST = 'https://script.google.com/macros/s/AKfycbywROVV9TQYbiF0kwp4K-f2L1bmm8QTxmOxJhQx6VnflGjxkFA6atqN8x3ZjUxjgY5X/exec';
+  const VIEW = { play: '', prize: '?view=prize', share: '?view=share', tv: '?view=tv' };
+
+  function get(k, d) { try { return localStorage.getItem(k) || d; } catch (e) { return d; } }
+  function set(k, v) { try { localStorage.setItem(k, v); } catch (e) {} }
+
+  let test = get('adminTest', '0') === '1';
+  let cur = get('adminView', 'play');
+  const frames = {};   // each view keeps its own frame, so Play keeps your card while you use Prize
+
+  function show(v) {
+    cur = v; set('adminView', v);
+    const key = (test ? 'test-' : 'real-') + v;
+    if (!frames[key]) {
+      const f = document.createElement('iframe');
+      f.src = (test ? TEST : REAL) + VIEW[v];
+      f.allow = 'fullscreen; web-share; clipboard-write; camera';
+      document.getElementById('apps').appendChild(f);
+      frames[key] = f;
+    }
+    Object.keys(frames).forEach(k => frames[k].classList.toggle('on', k === key));
+    document.querySelectorAll('nav button[data-v]').forEach(b => b.classList.toggle('on', b.dataset.v === v));
+    const m = document.getElementById('mode');
+    m.classList.toggle('test', test);
+    m.querySelector('span').textContent = test ? 'TEST' : 'REAL';
+  }
+  document.querySelectorAll('nav button[data-v]').forEach(b => b.onclick = () => {
+    if (b.dataset.v === cur) {                                   // tap the open one again = reload it
+      const f = frames[(test ? 'test-' : 'real-') + cur];
+      if (f) f.src = f.src;
+      return;
+    }
+    show(b.dataset.v);
+  });
+  document.getElementById('mode').onclick = () => {
+    if (!confirm(test ? 'Switch to the REAL app?' : 'Switch to the TEST app (test copy of the sheet)?')) return;
+    test = !test; set('adminTest', test ? '1' : '0'); show(cur);
+  };
+  show(cur);
+</script>
+</body>
+</html>
