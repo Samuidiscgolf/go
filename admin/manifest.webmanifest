@@ -1,0 +1,16 @@
+{
+  "id": "/go/admin/",
+  "name": "Samui Disc Golf – Admin",
+  "short_name": "SDG Admin",
+  "description": "Play, prize giving, share cards and TV – real or test app.",
+  "start_url": "/go/admin/",
+  "scope": "/go/admin/",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#021a52",
+  "theme_color": "#021a52",
+  "icons": [
+    { "src": "/go/logo-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "/go/logo-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" }
+  ]
+}
