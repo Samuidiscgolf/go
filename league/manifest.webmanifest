@@ -1,0 +1,16 @@
+{
+  "id": "/go/league/",
+  "name": "Samui Disc Golf – League",
+  "short_name": "SDG League",
+  "description": "League night: check-in and cards, live scoring, prize giving.",
+  "start_url": "/go/league/",
+  "scope": "/go/league/",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#021a52",
+  "theme_color": "#021a52",
+  "icons": [
+    { "src": "/go/logo-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "/go/logo-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" }
+  ]
+}
