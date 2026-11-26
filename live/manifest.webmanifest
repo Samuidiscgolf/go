@@ -1,0 +1,16 @@
+{
+  "id": "/go/live/",
+  "name": "Samui Disc Golf – Live",
+  "short_name": "SDG Live",
+  "description": "Follow the league night live.",
+  "start_url": "/go/live/",
+  "scope": "/go/live/",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#021a52",
+  "theme_color": "#021a52",
+  "icons": [
+    { "src": "/go/logo-live-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "/go/logo-live-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" }
+  ]
+}
