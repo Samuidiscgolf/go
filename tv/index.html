@@ -35,5 +35,18 @@
   const q = new URLSearchParams(location.search);
   document.getElementById('app').src = (q.has('test') ? TEST : REAL) + '?view=tv';
 </script>
+<script>
+  // 🔄 The app inside asks to be reloaded (a new version was published) – reload just that frame
+  window.addEventListener('message', e => {
+    if (!e.data || !e.data.sdgReload) return;
+    document.querySelectorAll('iframe').forEach(f => {
+      let w = e.source;
+      for (let i = 0; i < 4 && w && w !== window; i++) {
+        if (w === f.contentWindow) { f.src = f.src; return; }
+        try { w = w.parent; } catch (x) { return; }
+      }
+    });
+  });
+</script>
 </body>
 </html>
