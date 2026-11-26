@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<title>Samui Disc Golf – Live</title>
+<meta name="description" content="Follow tonight's league live – scores, results and aces.">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Samui Disc Golf">
+<meta property="og:title" content="Samui Disc Golf – Live">
+<meta property="og:description" content="Follow tonight's league live – scores, results and aces.">
+<meta property="og:image" content="https://samuidiscgolf.github.io/go/banner-tv.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:url" content="https://samuidiscgolf.github.io/go/live/">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" type="image/png" sizes="64x64" href="https://samuidiscgolf.github.io/go/favicon.png">
+<link rel="icon" type="image/png" sizes="192x192" href="https://samuidiscgolf.github.io/go/logo-live-192.png">
+<link rel="apple-touch-icon" href="https://samuidiscgolf.github.io/go/logo-live-192.png">
+<meta name="theme-color" content="#021a52">
+<meta name="mobile-web-app-capable" content="yes">
+<link rel="manifest" href="manifest.webmanifest?v=1">
+<style>
+  html, body { margin: 0; height: 100%; overflow: hidden; background: #0a1430; }
+  iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+</style>
+</head>
+<body>
+<iframe id="app" title="Samui Disc Golf – Live" allow="fullscreen"></iframe>
+<script>
+  // SDG Live v1.0 – follow the league night. The real app – or the TEST app with ?test at the end of the address
+  const REAL = 'https://script.google.com/macros/s/AKfycbyyEfrl2q0m-cO5RPbd9NgkKTF1zK56s_SxOWNBmvfNo3lt2Ds5Px7HHTHBSJcNp84LvQ/exec';
+  const TEST = 'https://script.google.com/macros/s/AKfycbywROVV9TQYbiF0kwp4K-f2L1bmm8QTxmOxJhQx6VnflGjxkFA6atqN8x3ZjUxjgY5X/exec';
+  document.getElementById('app').src = (new URLSearchParams(location.search).has('test') ? TEST : REAL) + '?view=follow';
+</script>
+<script>
+  // 🔄 The app inside asks to be reloaded (a new version was published) – reload just that frame
+  window.addEventListener('message', e => {
+    if (!e.data || !e.data.sdgReload) return;
+    document.querySelectorAll('iframe').forEach(f => {
+      let w = e.source;
+      for (let i = 0; i < 4 && w && w !== window; i++) {
+        if (w === f.contentWindow) { f.src = f.src; return; }
+        try { w = w.parent; } catch (x) { return; }
+      }
+    });
+  });
+</script>
+</body>
+</html>
